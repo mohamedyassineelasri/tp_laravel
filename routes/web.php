@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\presentation_C;
 use App\Http\Controllers\Produit_c;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,9 @@ Route::get('/produits/{produit}', [Produit_c::class, 'show'])->name('produits.sh
 Route::get('/produits/{produit}/edit', [Produit_c::class, 'edit'])->name('produits.edit');
 Route::post('/produits/{produit}', [Produit_c::class, 'update'])->name('produits.update');
 Route::delete('/produits/{produit}', [Produit_c::class, 'destroy'])->name('produits.destroy');
+
+// Route::controller(Produit_c::class)->group(function() {
+// } );
+
+
+
