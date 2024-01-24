@@ -20,6 +20,7 @@ class Produit_c extends Controller
 
     public function store(Request $request)
     {
+
         $libelle = $request->libelle;
         $marque = $request->marque;
         $prix = $request->prix;
@@ -29,9 +30,9 @@ class Produit_c extends Controller
         $request->validate([
             'libelle' => 'required|string',
             'marque' => 'required|string',
-            'prix' => 'required|numeric|between:1,9999', //numeric =khase ykon 3adad
-            'stock' => 'required|integer|between:1,9999',//integer =khase ykon 3adad bla facila
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'prix' => 'required|numeric', //numeric =khase ykon 3adad
+            'stock' => 'required|integer|between:1,4',//integer =khase ykon 3adad bla facila
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         // create le produit
@@ -42,8 +43,9 @@ class Produit_c extends Controller
             'stock' => $stock,
             'image' => $image,
         ]);
-
-        return redirect()->route('produits.index');
+        $produits = Produit::all('id')->last();//kanmxi l akher id
+        return redirect()->route('produits.show',$produits->id)
+        ->with('create','Votre produit est bien créé.');
     }
 
     public function show(Produit $produit)
@@ -62,19 +64,21 @@ class Produit_c extends Controller
             'libelle' => 'required|string',
             'marque' => 'required|string',
             'prix' => 'required|numeric',
-            'stock' => 'required|integer|between:1,9999',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'stock' => 'required|integer|between:1,4',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         // modifier le produit
         $produit->update($request->all());
-
-        return redirect()->route('produits.index');
+        $id = $request->segment(2);//kanjib id li url
+        return redirect()->route('produits.show',$id)
+        ->with('update','Votre produit est modifier.');
     }
 
     public function destroy(Produit $produit)
     {
         $produit->delete();
-        return redirect()->route('produits.index');
+        return redirect()->route('produits.index')
+        ->with('delete','Votre produit est supprimer.');
     }
 }

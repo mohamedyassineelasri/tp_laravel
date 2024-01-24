@@ -9,6 +9,20 @@
 
 </head>
 <body>
+
+        @if(session()->has('create'))
+            <div class="container alert alert-info mt-5">
+                {{session('create')}}
+            </div>
+        @endif
+
+        @if(session()->has('update'))
+        <div class="container alert alert-success mt-5">
+            {{session('update')}}
+        </div>
+    @endif
+
+
     <div class="col-sm-4 m-5 container">
         <div class="card  w-75  m-5"  >
             <img  style="height: 350px" src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="...">
@@ -24,7 +38,12 @@
                     <li><h5 class="card-title">Updated_at =>{{$produit->updated_at}}</h5></li>
                 </ul>
                 <a href="{{route('produits.index')}}" class="btn btn-secondary">Quitter</a>
-
+                <a href="{{ route('produits.edit', $produit->id) }}" class="btn btn-primary">Modifier</a>
+                <form action="{{ route('produits.destroy', $produit->id) }}" method="post" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" >Supprimer</button>
+                </form>
             </div>
         </div>
     </div>

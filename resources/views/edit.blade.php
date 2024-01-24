@@ -26,27 +26,27 @@
 
             <div class="form-group">
                 <label for="libelle">Libellé:</label>
-                <input type="text" name="libelle" class="form-control"  value="{{$produit->libelle}}">
+                <input type="text" name="libelle" class="form-control" value="{{old('libelle',$produit->libelle)}}">
             </div>
 
             <div class="form-group">
                 <label for="marque">Marque:</label>
-                <input   value="{{$produit->marque}}" type="text" name="marque" class="form-control" >
+                <input   value="{{old('marque',$produit->marque)}}" type="text" name="marque" class="form-control" >
             </div>
 
             <div class="form-group">
                 <label for="prix">Prix:</label>
-                <input   value="{{$produit->prix}}" type="number" name="prix" step="0.01" class="form-control" >
+                <input   value="{{old('prix',$produit->prix)}}" type="number" name="prix" step="0.01" class="form-control" >
             </div>
 
             <div class="form-group">
                 <label for="stock">Stock:</label>
-                <input   value="{{$produit->stock}}" type="number" name="stock" class="form-control" >
+                <input   value="{{old('stock',$produit->stock)}}" type="number" name="stock" class="form-control" >
             </div>
 
             <div class="form-group">
                 <label for="image">Image:</label>
-                <input   value="{{$produit->image}}" type="file" name="image" class="form-control-file">
+                <input   value="{{old('image',$produit->image)}}" type="file" name="image" class="form-control-file">
             </div>
 
             <button type="submit" class="btn btn-success">Modifier</button>

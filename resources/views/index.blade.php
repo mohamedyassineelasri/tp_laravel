@@ -9,43 +9,55 @@
 
 </head>
 <body>
-    <h1>Liste des Produits</h1>
-    <a href="{{ route('produits.create') }}" class="btn btn-success">Créer un Produit</a>
+    <div  class="container">
+        @if(session()->has('delete'))
+            <div class="container alert alert-danger mt-5">
+                {{session('delete')}}
+            </div>
+        @endif
+        <ul>
+            <li type="circle">
+                <h1>Liste des Produits</h1>
+            </li>
+        </ul>
+        <a href="{{ route('produits.create') }}" class="btn btn-success">Créer un Produit</a>
 
-    <table class="table mt-3">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Libellé</th>
-                <th>Marque</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Image</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($produits as $produit)
+        <table class="table mt-3 container">
+            <thead>
                 <tr>
-                    <td>{{ $produit->id }}</td>
-                    <td>{{ $produit->libelle }}</td>
-                    <td>{{ $produit->marque }}</td>
-                    <td>{{ $produit->prix }}$</td>
-                    <td>{{ $produit->stock }}</td>
-                    <td>{{ $produit->image }}</td>
-                    <td>
-                        <a href="{{ route('produits.show', $produit->id) }}" class="btn btn-info">Détails</a>
-                        <a href="{{ route('produits.edit', $produit->id) }}" class="btn btn-primary">Modifier</a>
-                        <form action="{{ route('produits.destroy', $produit->id) }}" method="post" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" >Supprimer</button>
-                        </form>
-                    </td>
+                    <th>Id</th>
+                    <th>Libellé</th>
+                    <th>Marque</th>
+                    <th>Prix</th>
+                    <th>Stock</th>
+                    <th>Image</th>
+                    <th>Actions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($produits as $produit)
+                    <tr>
+                        <td>{{ $produit->id }}</td>
+                        <td>{{ $produit->libelle }}</td>
+                        <td>{{ $produit->marque }}</td>
+                        <td>{{ $produit->prix }}$</td>
+                        <td>{{ $produit->stock }}</td>
+                        <td>{{ $produit->image }}</td>
+                        <td>
+                            <a href="{{ route('produits.show', $produit->id) }}" class="btn btn-info">Détails</a>
+                            <a href="{{ route('produits.edit', $produit->id) }}" class="btn btn-primary">Modifier</a>
+                            <form action="{{ route('produits.destroy', $produit->id) }}" method="post" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" >Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
 
