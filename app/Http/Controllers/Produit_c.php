@@ -43,7 +43,7 @@ class Produit_c extends Controller
             'stock' => $stock,
             'image' => $image,
         ]);
-        $produits = Produit::all('id')->last();
+        $produits = Produit::all('id')->last();//kanmxi l akher id
         return redirect()->route('produits.show',$produits->id)
         ->with('create','Votre produit est bien créé.');
     }
@@ -70,7 +70,7 @@ class Produit_c extends Controller
 
         // modifier le produit
         $produit->update($request->all());
-        $id = $request->segment(2);
+        $id = $request->segment(2);//kanjib id li url
         return redirect()->route('produits.show',$id)
         ->with('update','Votre produit est modifier.');
     }
